@@ -88,6 +88,7 @@ public class FeedActivity extends AppCompatActivity implements FeedDataService.O
             }
 
             // set Adapter here pass arrayList inside adapter
+
             showCaseAdapter = new ShowCaseAdapter(mContext, showcaseList);
             recyclerView.setAdapter(showCaseAdapter);
             showCaseAdapter.notifyDataSetChanged();
