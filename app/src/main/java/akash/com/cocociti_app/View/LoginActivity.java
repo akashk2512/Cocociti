@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements SignInService.On
     private SignInService signInService = null;
     Context mContext;
     ProgressDialog dialog = null;
+    StoreData storeData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements SignInService.On
         mContext = LoginActivity.this;
         getSupportActionBar().setTitle("Login");
         dialog = new ProgressDialog(mContext);
+        storeData = StoreData.getInstance();
 
     }
 
@@ -105,16 +107,28 @@ public class LoginActivity extends AppCompatActivity implements SignInService.On
         AppUtils.dissMissDailog(dialog);
 
         if (response != null){
-            if (response.getStatus().equals(AppConstant.SUCCESS));
-            Log.d("Status"," Response "+response.getStatus());
-            Intent intent = new Intent(mContext, FeedActivity.class);
-            intent.putExtra("token",response.getUser().getAccess_token());
-            intent.putExtra("email",response.getUser().getEmail());
-            startActivity(intent);
-            Toast.makeText(mContext,response.getStatus().toString(),Toast.LENGTH_LONG).show();
+            if (response.getStatus().equals(AppConstant.SUCCESS)){
+
+                Log.d("Status"," Response "+response.getStatus());
+                if (response.getUser() != null){
+                    Log.d("Status"," user "+response.getUser().getAccess_token());
+                    storeData.setAccessToken(response.getUser().getAccess_token());
+                    storeData.setEmailId(response.getUser().getEmail());
+                    Intent intent = new Intent(mContext, FeedActivity.class);
+//                    intent.putExtra("token",response.getUser().getAccess_token());
+//                    intent.putExtra("email",response.getUser().getEmail());
+                    startActivity(intent);
+                }
+
+                AppUtils.showToast(mContext,response.getStatus().toString());
+
+            }else {
+                AppUtils.showToast(mContext,"status "+response.getStatus().toString());
+            }
+
         }else {
             Log.d("Status"," Response "+response);
-            Toast.makeText(mContext,"Sorry server not responding",Toast.LENGTH_LONG).show();
+            AppUtils.showToast(mContext,"Sorry server not responding");
         }
 
     }
@@ -123,7 +137,8 @@ public class LoginActivity extends AppCompatActivity implements SignInService.On
     public void onSignFailure(Throwable error) {
         AppUtils.dissMissDailog(dialog);
         Log.d("Status","Failure "+error);
-        Toast.makeText(mContext,"Sorry..!!! "+error,Toast.LENGTH_LONG).show();
+        AppUtils.showToast(mContext,"Sorry..!!! "+error);
+
 
     }
 

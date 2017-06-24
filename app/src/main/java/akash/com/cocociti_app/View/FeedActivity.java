@@ -31,7 +31,7 @@ public class FeedActivity extends AppCompatActivity implements FeedDataService.O
     private FeedDataService feedDataService = null;
     private Context mContext;
     ProgressDialog dialog = null;
-    Intent intentData;
+//    Intent intentData;
     public List<Showcase> showcaseList = null;
     private ShowCaseAdapter showCaseAdapter = null;
 
@@ -42,7 +42,7 @@ public class FeedActivity extends AppCompatActivity implements FeedDataService.O
         ButterKnife.bind(this);
         mContext = FeedActivity.this;
         dialog = new ProgressDialog(mContext);
-        intentData = getIntent();
+//        intentData = getIntent();
         getSupportActionBar().setTitle("Show Case");
 
         recyclerView.setHasFixedSize(true);
@@ -70,7 +70,8 @@ public class FeedActivity extends AppCompatActivity implements FeedDataService.O
             showcaseList.clear();
             AppUtils.showLoadingDialog(mContext, dialog);
             feedDataService = new FeedDataService(this, this);
-            feedDataService.getResponse(intentData.getStringExtra("email"), intentData.getStringExtra("token"));
+//            feedDataService.getResponse(intentData.getStringExtra("email"), intentData.getStringExtra("token"));
+            feedDataService.getResponse(StoreData.getEmailId(), StoreData.getAccessToken());
         }else {
             Toast.makeText(mContext,"Please check internet connection",Toast.LENGTH_LONG).show();
         }

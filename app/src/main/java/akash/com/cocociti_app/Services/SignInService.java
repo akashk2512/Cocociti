@@ -50,7 +50,7 @@ public class SignInService extends BaseService {
         signInRequest.setUser(user);
 
         IServiceApis serviceApis = mRetrofit.create(IServiceApis.class);
-        mCall = serviceApis.getResponse(signInRequest);
+        mCall = serviceApis.getResponse("application/json","application/json" ,signInRequest);
 
         mCall.enqueue(new Callback<SignInResponse>() {
             @Override

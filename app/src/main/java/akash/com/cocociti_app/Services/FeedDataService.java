@@ -47,7 +47,7 @@ public class FeedDataService extends BaseService {
         feedRequest.setAccess_token(token);
 
         IServiceApis serviceApis = mRetrofit.create(IServiceApis.class);
-        mCall = serviceApis.getResponse(feedRequest);
+        mCall = serviceApis.getResponse(token, email);
         mCall.enqueue(new Callback<FeedResponse>() {
             @Override
             public void onResponse(Response<FeedResponse> response, Retrofit retrofit) {

@@ -1,6 +1,8 @@
 package akash.com.cocociti_app.Services;
 
+import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import akash.com.cocociti_app.AppConstant;
@@ -17,6 +19,7 @@ public abstract class BaseService {
     protected Retrofit mRetrofit;
 
     public abstract void cancelRequest();
+
     public BaseService() {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

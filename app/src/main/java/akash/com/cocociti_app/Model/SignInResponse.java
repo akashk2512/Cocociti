@@ -17,7 +17,7 @@ public class SignInResponse {
     @Expose
     private String info;
 
-    @SerializedName("user")
+    @SerializedName("data")
     @Expose
     private User user;
 

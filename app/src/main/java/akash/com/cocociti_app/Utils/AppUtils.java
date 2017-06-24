@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.Gravity;
+import android.widget.Toast;
 
 /**
  * Created by Akash on 6/23/2017.
@@ -37,5 +39,11 @@ public class AppUtils {
         if (dialog != null){
             dialog.dismiss();
         }
+    }
+
+    public static void showToast(Context context, String message){
+        Toast toast =  Toast.makeText(context, message ,Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }
